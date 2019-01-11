@@ -14,10 +14,10 @@ class Main(base, main):
         self.setupUi(self)
         
         self.calculate_button.clicked.connect(self.calculateHouse)
-        self.forward_button.clicked.connect(self.forward)
-        self.backward_button.clicked.connect(self.backward)
+        #self.forward_button.clicked.connect(self.forward)
+        #self.backward_button.clicked.connect(self.backward)
         
-        self.columns = ['Neighborhood', 'ExterQual', 'KitchenQual', 'BsmtQual', 'GarageFinish', 'Foundation', 'HeatingQC', 'GarageType', 'MasVnrType', 'SalePrice','GrLivArea','GarageCars','GarageArea','TotalBsmtSF','stFlrSF','FullBath','TotRmsAbvGrd','Yearbuilt','OverallQual']
+        self.columns = ['Neighborhood', 'ExterQual', 'KitchenQual', 'BsmtQual', 'GarageFinish', 'Foundation', 'HeatingQC', 'GarageType', 'MasVnrType', 'BsmtFinType1', 'SalePrice','GrLivArea','GarageCars','GarageArea','TotalBsmtSF','stFlrSF','FullBath','TotRmsAbvGrd','Yearbuilt','OverallQual']
         self.df = pd.DataFrame(index = [1],columns=self.columns)
 
         self.data = 0
@@ -28,6 +28,8 @@ class Main(base, main):
         print('calculating..')
         self.getNumerical()
         self.getCategorical()
+        self.df.rename({"stFlrSF": "1stFlrSF"},axis='columns',inplace=True)
+        print(self.df)
         self.df.to_csv('user_input.csv', sep=',', index = False, header = True)
         postProcessing.postProcessing()
 
@@ -46,7 +48,7 @@ class Main(base, main):
         #self.df.to_csv('user_input.csv', sep=',', index = False, header = True)        
     
     def getCategorical(self):
-        fields = ['Neighborhood', 'ExterQual', 'KitchenQual', 'BsmtQual', 'GarageFinish', 'Foundation', 'HeatingQC', 'GarageType', 'MasVnrType']
+        fields = ['Neighborhood', 'ExterQual', 'KitchenQual', 'BsmtQual', 'GarageFinish', 'Foundation', 'HeatingQC', 'GarageType', 'MasVnrType','BsmtFinType1']
         for field in fields:
             exec('self.cat = self.' + field + '.currentText()')
             if self.cat == '<none>':
@@ -76,7 +78,7 @@ class Main(base, main):
    
     def getNumerical(self):
         self.is_numerical = True
-        fields = ['SalePrice','GrLivArea','GarageCars','GarageArea','TotalBsmtSF','stFlrSF','FullBath','TotRmsAbvGrd','Yearbuilt']
+        fields = ['SalePrice','GrLivArea','GarageCars','GarageArea','TotalBsmtSF','stFlrSF','FullBath','TotRmsAbvGrd','YearBuilt']
         for field in fields:
             exec(str('self.data = ' + 'self.' + field + '.text()'))
             self.checkWriteNumerical(field,self.data)
@@ -87,11 +89,10 @@ class Main(base, main):
             runErrorDialog.errorDialog()   
    
     
+ 
     def setAlternative(self):
-        print('setAlternative')
+        alt = pd.read_csv('finished_alternative.csv')
         
-    def setNumerical(self):
-        print('settingNumerical')
         
     def setCategorical(self):
         print('settingCategorical')

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>966</width>
-    <height>693</height>
+    <width>1339</width>
+    <height>806</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -23,7 +23,7 @@
    <widget class="QPushButton" name="calculate_button">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>200</x>
       <y>590</y>
       <width>131</width>
       <height>45</height>
@@ -41,7 +41,7 @@
    <widget class="QPushButton" name="reset_button">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>600</x>
       <y>590</y>
       <width>86</width>
       <height>45</height>
@@ -81,8 +81,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>140</y>
+      <x>160</x>
+      <y>150</y>
       <width>174</width>
       <height>49</height>
      </rect>
@@ -99,8 +99,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>140</y>
+      <x>840</x>
+      <y>150</y>
       <width>311</width>
       <height>49</height>
      </rect>
@@ -111,7 +111,7 @@ p, li { white-space: pre-wrap; }
      </font>
     </property>
     <property name="text">
-     <string>Alternatives found</string>
+     <string>Alternative found</string>
     </property>
    </widget>
    <widget class="QFrame" name="frame">
@@ -165,12 +165,12 @@ p, li { white-space: pre-wrap; }
       <string>Categorical</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>260</x>
        <y>40</y>
-       <width>241</width>
+       <width>251</width>
        <height>331</height>
       </rect>
      </property>
@@ -710,7 +710,7 @@ p, li { white-space: pre-wrap; }
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>3</x>
@@ -840,7 +840,7 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
       <item row="9" column="1">
-       <widget class="QLineEdit" name="Yearbuilt">
+       <widget class="QLineEdit" name="YearBuilt">
         <property name="text">
          <string/>
         </property>
@@ -913,8 +913,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QFrame" name="frame_2">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>200</y>
+      <x>760</x>
+      <y>670</y>
       <width>361</width>
       <height>381</height>
      </rect>
@@ -1066,41 +1066,498 @@ p, li { white-space: pre-wrap; }
      </column>
     </widget>
    </widget>
-   <widget class="QPushButton" name="backward_button">
+   <widget class="QFrame" name="frame_3">
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>590</y>
+      <y>200</y>
       <width>151</width>
-      <height>45</height>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLineEdit" name="evaluation">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>150</y>
+       <width>112</width>
+       <height>27</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="pred_price">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>112</width>
+       <height>27</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_25">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>85</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Predicted Price</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_26">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>120</y>
+       <width>146</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Evaluation (too high/low?)</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>130</y>
+      <width>20</width>
+      <height>631</height>
+     </rect>
+    </property>
+    <property name="baseSize">
+     <size>
+      <width>7</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="lineWidth">
+     <number>6</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_27">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>160</y>
+      <width>111</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>20</pointsize>
+      <pointsize>26</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>&lt;Backward</string>
+     <string>Result</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="forward_button">
+   <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
       <x>730</x>
-      <y>590</y>
-      <width>141</width>
-      <height>45</height>
+      <y>130</y>
+      <width>20</width>
+      <height>631</height>
      </rect>
+    </property>
+    <property name="baseSize">
+     <size>
+      <width>7</width>
+      <height>0</height>
+     </size>
     </property>
     <property name="font">
      <font>
-      <pointsize>20</pointsize>
+      <pointsize>16</pointsize>
      </font>
     </property>
-    <property name="text">
-     <string>Forward&gt;</string>
+    <property name="lineWidth">
+     <number>6</number>
     </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_4">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>200</y>
+      <width>531</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_28">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>10</y>
+       <width>91</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Numerical</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_29">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>10</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Categorical</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>40</y>
+       <width>241</width>
+       <height>331</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_3">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_30">
+        <property name="text">
+         <string>Neighborhood*</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_31">
+        <property name="text">
+         <string>ExterQual*</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_32">
+        <property name="text">
+         <string>KitchenQual</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_33">
+        <property name="text">
+         <string>BsmtQual</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_34">
+        <property name="text">
+         <string>GarageFinish</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_35">
+        <property name="text">
+         <string>Foundation</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_36">
+        <property name="text">
+         <string>HeatingQC</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_37">
+        <property name="text">
+         <string>GarageType</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="label_38">
+        <property name="text">
+         <string>MasVnrType</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="label_39">
+        <property name="text">
+         <string>BsmtFinType1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="Neighborhood_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="ExterQual_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="KitchenQual_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="BsmtQual_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="GarageFinish_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="Foundation_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="HeatingQC_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="GarageType_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QLineEdit" name="MasVnrType_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QLineEdit" name="BsmtFinType1_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>3</x>
+       <y>40</y>
+       <width>253</width>
+       <height>349</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_4">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_40">
+        <property name="text">
+         <string>Sale Price</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="SalePrice_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_41">
+        <property name="text">
+         <string>Overall Quality</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="GrLivArea_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="GarageCars_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="TotalBsmtSF_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="GarageArea_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_42">
+        <property name="text">
+         <string>Living Area</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_43">
+        <property name="text">
+         <string>Car capacity</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_44">
+        <property name="text">
+         <string>Garage area</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_45">
+        <property name="text">
+         <string>Basement sqft</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="stFlrSF_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QLineEdit" name="TotRmsAbvGrd_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="FullBath_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_46">
+        <property name="text">
+         <string>1st floor sqft</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_47">
+        <property name="text">
+         <string>Bathrooms</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="label_48">
+        <property name="text">
+         <string>Rooms (abv gnd)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QLineEdit" name="YearBuilt_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="label_49">
+        <property name="text">
+         <string>Year built</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="OverallQual_2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -1115,7 +1572,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>stFlrSF</tabstop>
   <tabstop>FullBath</tabstop>
   <tabstop>TotRmsAbvGrd</tabstop>
-  <tabstop>Yearbuilt</tabstop>
+  <tabstop>YearBuilt</tabstop>
   <tabstop>Neighborhood</tabstop>
   <tabstop>ExterQual</tabstop>
   <tabstop>KitchenQual</tabstop>
@@ -1127,8 +1584,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>MasVnrType</tabstop>
   <tabstop>BsmtFinType1</tabstop>
   <tabstop>calculate_button</tabstop>
-  <tabstop>forward_button</tabstop>
-  <tabstop>backward_button</tabstop>
   <tabstop>tableWidget</tabstop>
   <tabstop>tableWidget_2</tabstop>
   <tabstop>reset_button</tabstop>
