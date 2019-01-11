@@ -113,15 +113,7 @@ def predkNN(trainData, NHData, inData=None, n_neighbors = 5, misVal=None):
     if inData is not None:
         data = trainData.append(inData, ignore_index=False, sort=False)
     else:
-        data = trainData
-    
-    if np.isnan(misVal):
-        maskMissing = data.isna()
-    elif misVal is None:
-        maskMissing = data.isnull()
-    else:
-        raise ValueError('{} currently not implemented for missing values'.format(misVal))
-        
+        data = trainData       
     
     # split up data into numerical and categorical
     numFeat = []
@@ -131,6 +123,7 @@ def predkNN(trainData, NHData, inData=None, n_neighbors = 5, misVal=None):
             numFeat.append(feature)
         else:
             catFeat.append(feature)
+            
             
     dataNum = data[numFeat]
     if 'Id' in dataNum.columns:
@@ -151,13 +144,25 @@ def predkNN(trainData, NHData, inData=None, n_neighbors = 5, misVal=None):
             dataNum = pd.concat([dataNum,locVals], axis=1)
         else:    
             categories = dataCat[feature].unique()
+            categories = categories[~pd.isna(categories)]
             for cat in categories:
                 catName = '{} = {}'.format(feature, cat)
                 dataCat[catName] = False
                 dataCat.loc[dataCat[feature] == cat, catName] = True
+                if np.isnan(misVal):
+                    dataCat.loc[dataCat[feature].isna(), catName] = misVal
+                elif misVal is None:
+                    dataCat.loc[dataCat[feature].isnull(), catName] = misVal
         dataCat = dataCat.drop(feature, axis=1)      
     
     data = pd.concat([dataNum,dataCat], axis=1)
+    
+    if np.isnan(misVal):
+        maskMissing = data.isna()
+    elif misVal is None:
+        maskMissing = data.isnull()
+    else:
+        raise ValueError('{} currently not implemented for missing values'.format(misVal))
     
     # normalize numerical data 
     # (necessary for distance function to value all features equally)
@@ -170,7 +175,8 @@ def predkNN(trainData, NHData, inData=None, n_neighbors = 5, misVal=None):
                        missing_values=misVal,
                        n_neighbors=n_neighbors,
                        weights="distance",
-                       row_max_missing=1)
+                       row_max_missing=1,
+                       col_max_missing=1)
     
     # scale back to normal    
     impNumMax = impNumNorm.max(axis=0)
@@ -183,13 +189,14 @@ def predkNN(trainData, NHData, inData=None, n_neighbors = 5, misVal=None):
                         missing_values=misVal,
                         n_neighbors=n_neighbors,
                         weights="distance",
-                        row_max_missing=1)
+                        row_max_missing=1,
+                        col_max_missing=1).round().astype(bool).astype(int)
     
     # concatenate numerical and boolean data again
     impData = pd.concat([impNum, impBool], axis=1)
     
     # insert imputed data in missing values
-    data[maskMissing] = impData[maskMissing]
+    data.mask(maskMissing, other=impData, inplace=True)
     
     return data
 #------------------------------------------------------------------------------
