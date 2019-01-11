@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 def postProcessing():
-    
+    #convertes gui input into processing format
     reader = csv.reader(open('plain.csv'))    
     dic = {}
     for row in reader:
@@ -22,39 +22,35 @@ def postProcessing():
     
     for key in dic:
         my_csv_text = re.sub(str(key),str(dic[key][0]),my_csv_text)
-    # substitute
-    #new_csv_str = re.sub(find_str, replace_str, my_csv_text)
-    
-    # open new file and save
+
     print(my_csv_text)
     with open(my_csv_path, 'w') as f:
         f.write(my_csv_text)
 
 def postProcessing2():
-    
-    reader = csv.reader(open('plain.csv'))    
+    #converts the finished alternative back into gui output
+    reader = csv.reader(open('plain2.csv'))    
     dic = {}
     for row in reader:
         key = row[0]
         if key in dic:
             pass
         dic[key] = row[1:]
-
-    my_csv_path = 'user_input.csv'
+    my_csv_path = 'finished_alternative.csv'
     # open your csv and read as a text string
+    with open(my_csv_path, newline='') as f:
+        reader = csv.reader(f)
+        row1 = next(reader)
+        row2 = next(f)
+        
     with open(my_csv_path, 'r') as f:
         my_csv_text = f.read()
-    
-    
+
     for key in dic:
-        my_csv_text = re.sub(str(key),str(dic[key][0]),my_csv_text)
-    # substitute
-    #new_csv_str = re.sub(find_str, replace_str, my_csv_text)
-    
-    # open new file and save
-    print(my_csv_text)
-    with open(my_csv_path, 'w') as f:
-        f.write(my_csv_text)
+        row2 = re.sub(str(key),str(dic[key][0]),row2)
+
+    df = pd.DataFrame([row2.split(",")],columns=row1,index=[0])
+    df.to_csv(my_csv_path, sep=',', index = False, header = True)
 
 
 def convertAlternatives():
@@ -79,7 +75,6 @@ def convertAlternatives():
     for Dict in dic:
         if comp == Dict['loc']:
             df['Neighborhood'] = Dict['adr']
-            print(Dict['adr'])
         else:
             pass
 
@@ -108,7 +103,9 @@ def convertAlternatives():
     
     for field in fields:
         df[field] = temp[field]
+    print(df.columns)
     df.to_csv('finished_alternative.csv', sep=',', index = False, header = True)
     
 if __name__ == "__main__":
     convertAlternatives()
+    postProcessing2()

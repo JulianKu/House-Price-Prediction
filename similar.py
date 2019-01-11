@@ -5,9 +5,6 @@ import matplotlib.pyplot as plt
 import pandas as pd  
 
 
-data = pd.read_csv("house_geo_binominal.csv") 
-inputfile="test.csv"
-
 def is_number(s):
     try:
         float(s)
@@ -38,7 +35,7 @@ def distanz(input,house):
                 score+=1/((abs(input[i]))/(a));
     return score; 
 
-def findsimilarhouses(inputfile):
+def findsimilarhouses(inputfile,data):
     input = pd.read_csv(inputfile);
     df = data[list(input.columns.values)]
     scores = np.empty(len(df.index), dtype=float)
@@ -50,9 +47,10 @@ def findsimilarhouses(inputfile):
     df = pd.DataFrame(df.head())
     print(df.head())
     ## parse back to categorical! 
-    df.to_csv("Similar_Houses.csv" )
+    df.to_csv("test_similarhouses.csv" )
     return df.head();
     
-def run():
-    findsimilarhouses(inputfile);
+def run(inputfile):
+    data = pd.read_csv("house_geo_binominal.csv") 
+    findsimilarhouses(inputfile,data);
     
