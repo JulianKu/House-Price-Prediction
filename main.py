@@ -8,6 +8,7 @@ import postProcessing
 qtCreatorFile = "main.ui" # Enter file here.
 main, base = uic.loadUiType(qtCreatorFile)
 import similar
+#import predictionFramework
 
 class Main(base, main):
     def __init__(self, parent=None):
@@ -35,8 +36,25 @@ class Main(base, main):
         #remap
         postProcessing.postProcessing()
         
+        #prediction
+        #sample = pd.read_csv('user_input.csv')
+        #(price,imputedData)=predictionFramework.run(sample)
+        #self.pred_price.setText(str(price))
+        price = 100
+        print(self.df.loc['SalePrice'])
+        #if (price - self.df.loc[0,'SalePrice'])/self.df.loc[0,'SalePrice'] > 0.1:
+            #self.evaluation.setText('is too low')
+        #elif (self.df.loc[0,'SalePrice'] - price)/self.df.loc[0,'SalePrice'] > 0.1: 
+            #self.evaluation.setText('is too high')
+            ##price too high
+        #else:
+            #self.evaluation.setText('is OK')
+            #price ok
+            
         #search alternatives
         #similar.run('processed_user_input.csv')
+        
+        #
         postProcessing.convertAlternatives()
         postProcessing.postProcessing2()
         self.setAlternatives()

@@ -32,31 +32,35 @@ def makePrediction(trainData, NHData, inData, model=None, misVal=None):
 #----------------------------------------
 # to run at initialization of GUI:
 #----------------------------------------
-
-# for missing value imputation
-  
-# load data
-trainData, target = loadData('data', 'SalePrice')
-
-# get neighborhood geographical coordinates and value bins
-if not os.path.isfile('neighborhood.json'):
-    neighborhoods = prepNeighbors(trainData, target,
-                              bins=[0,100000,150000,200000,250000,300000,np.inf])
-else:
-    with open('neighborhood.json', 'r') as f:
-        neighborhoods = json.load(f)
+def run(sample):
+    # for missing value imputation
+      
+    # load data
+    trainData, target = loadData('data', 'SalePrice')
     
-missingVal = np.nan
+    # get neighborhood geographical coordinates and value bins
+    if not os.path.isfile('neighborhood.json'):
+        neighborhoods = prepNeighbors(trainData, target,
+                                  bins=[0,100000,150000,200000,250000,300000,np.inf])
+    else:
+        with open('neighborhood.json', 'r') as f:
+            neighborhoods = json.load(f)
+        
+    missingVal = np.nan
+    
+    #for price prediction
+    
+    #load model
+    modelFile = 'RandomCVModel.rfmdl'
+    if os.path.isfile(modelFile):
+        model = pickle.load(open(modelFile, 'rb'))
+    else:
+        raise IOError('file {} could not be found.\n Specify directory and make sure file exists')
+    
+    price, imputedData = makePrediction(trainData, neighborhoods, sample, model, missingVal)
+    return(price,imutedData)
 
-#for price prediction
-
-#load model
-modelFile = 'RandomCVModel.rfmdl'
-if os.path.isfile(modelFile):
-    model = pickle.load(open(modelFile, 'rb'))
-else:
-    raise IOError('file {} could not be found.\n Specify directory and make sure file exists')
-
+if __name__ == "__main__":
 #------------------------------------------
-sample = pd.read_csv('user_input.csv')
-price, imputedData = makePrediction(trainData, neighborhoods, sample, model, missingVal)
+    sample = pd.read_csv('user_input.csv')
+    run(sample)
