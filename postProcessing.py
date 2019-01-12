@@ -62,7 +62,10 @@ def convertAlternatives():
     df['Score'] = temp['Score']
     
     #Drop the neighborhood value so it won' get from temp to df
-    temp.drop(columns=['Neighborhood'],inplace=True)
+    try:
+        temp.drop(columns=['Neighborhood'],inplace=True)
+    except KeyError:
+        pass
     
     #load dictionary
     json1_file = open('neighborhood.json')

@@ -20,12 +20,12 @@ def makePrediction(trainData, NHData, inData, model=None, misVal=None):
     inDataImp = impData.loc['query'].to_frame().transpose()
     inDataImp.rename({'BsmtQual = NA':'BsmtQual = No Basement',
                       'BsmtFinType1 = NA':'BsmtFinType1 = No Basement',
-                      'GarageType = NA':'GarageType = No Garage',
-                      'GarageFinish = NA':'GarageFinish = No Garage'},
+                      'GarageType = NA':'GarageType = No_Garage',
+                      'GarageFinish = NA':'GarageFinish = No_Garage'},
                       axis=1,
                       inplace=True)
     if model is not None:
-        predPrice = predictSalesPrice(inDataImp, model)
+        predPrice = predictSalesPrice(inDataImp, model)[0]
         return predPrice, inDataImp
 #    return impData, _
 

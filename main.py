@@ -67,7 +67,8 @@ class Main(base, main):
     def comparePrices(self,price):
         df = pd.read_csv('user_input.csv', sep=',')
         self.pred_price.setText(str(price))
-        print(df['SalePrice'])
+        print('Sale Price = {}'.format(df.loc[0, 'SalePrice']))
+        print('predicted Price = {}'.format(price))
         if (price - df.loc[0,'SalePrice'])/df.loc[0,'SalePrice'] > 0.1:
             self.evaluation.setText('is too low')
         elif (df.loc[0,'SalePrice'] - price)/df.loc[0,'SalePrice'] > 0.1: 
@@ -103,7 +104,7 @@ class Main(base, main):
                 self.is_numerical = False
                 exec(str('self.'+str(field)+'.clear()'))
                 runErrorDialog.errorDialog()
-                #self.buildExamplePopup
+                self.buildExamplePopup
         
    
     def getNumerical(self):
