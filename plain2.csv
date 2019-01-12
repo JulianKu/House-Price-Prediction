@@ -1,0 +1,35 @@
+Ex,Excellent
+Gd,Good
+TA,Average/Typical
+Fa,Fair
+Po,Poor
+NA,No Basement
+Fin,Finished
+RFn,Rough Finished
+Unf,Unfinished
+NA,No Garage
+BrkTil,Brick/Tile
+CBlock,Cinder Block
+PConc,Poured Concrete
+Slab,Slab
+Stone,Stone
+Wood,Wood
+2type,2type
+Attchd,Attached to home
+Basment,Basement Garage
+BuiltIn,Built-In
+CarPort,Car Port
+Detchd,Detached from home
+NA,No Garage
+BrkCmn,Brick Common
+BrkFace,Brick Face
+CBlock,Cinder Block
+None,None
+Stone,Stone
+GLQ,Good Living Quarters
+ALQ,Average Living Quarters
+BLQ,Below Average Living Quarters
+Rec,Average Rec Room
+LwQ,Low Quality
+Unf,Unfinshed
+NA,No basement
