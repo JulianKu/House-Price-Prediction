@@ -28,45 +28,81 @@ class Main(base, main):
         
     def calculateHouse(self):
         print('calculating..')
-        self.getNumerical()
-        self.getCategorical()
+        
+        #getNumerical Data
+        try:
+            self.getNumerical()
+        except KeyError:
+            print("Something went wrong with getting the numerical data, modify your data and try again")        
+        
+        #get the Categorical Data
+        try:
+            self.getCategorical()
+        except KeyError:
+            print("Something went wrong with getting the categorical data, modify your data and try again")        
+        
         self.df.rename({"stFlrSF": "1stFlrSF"},axis='columns',inplace=True)
         #write to file
         self.df.to_csv('user_input.csv', sep=',', index = False, header = True)
-        #remap
-        postProcessing.postProcessing()
+        #
+        #map the user input to a format that our training engine can process in order to predict
+        try:
+            postProcessing.postProcessing()
+        except KeyError:
+            print("Something went wrong while converting your user input, modify your data and try again")        
         
-        #prediction
+        #predicion of output from user input
         sample = pd.read_csv('user_input.csv')
-        (price,imputedSample)=predictionFramework.run(sample)
-        #
-        #price = 100
-        self.comparePrices(price)
+        try:
+            (price,imputedSample)=predictionFramework.run(sample)
+        except ValueError:
+            print("Some field from the alternative is missing, modify your data and try again")  
+            price = "Not available"
         
-            
+        #compare the input price with the expected price ValueError
+        try:
+            self.comparePrices(price) 
+        except ValueError:
+            print("It appears you have found an edge of our model. The expected price is too high")            
+        
+        
+        
         #search alternatives
-        similar.run('processed_user_input.csv')
+        try:
+            similar.run('processed_user_input.csv')
+        except KeyError:
+            print("Sorry, we did not find any good alternatives, modify your data and try again")        
         
-        #
-        postProcessing.convertAlternatives()
-        postProcessing.postProcessing2()
+        #extract alternatives
+        try:
+            postProcessing.convertAlternatives()
+        except KeyError:
+            print("We could not convert the alternatives file we found back to user input.Maybe have a look at the 'test_similarhouses.csv' or modify your data and try again")        
+        
+        #converting back to human readable code and putting it into the GUI
+        try:
+            postProcessing.postProcessing2()
+        except KeyError:
+            print("We could not convert the alternatives file we found back to user input.Maybe have a look at the 'finished_alternative.csv' or modify your data and try again")        
+        
         self.setAlternatives()
-    def postProcessing(self):
-        self.df.to_csv('user_input.csv', sep=',', index = False, header = True)        
-        reader = csv.reader(open('plain.csv'))    
-        dic = {}
-        for row in reader:
-            key = row[0]
-            if key in dic:
-                pass
-            dic[key] = row[1:]
-        self.df = pd.read_csv('user_input.csv')
-        self.df.replace(dic)
-        self.df.to_csv('user_input.csv', sep=',', index = False, header = True)        
+        
+    #def postProcessing(self):
+        #self.df.to_csv('user_input.csv', sep=',', index = False, header = True)        
+        #reader = csv.reader(open('plain.csv'))    
+        #dic = {}
+        #for row in reader:
+            #key = row[0]
+            #if key in dic:
+                #pass
+            #dic[key] = row[1:]
+        #self.df = pd.read_csv('user_input.csv')
+        #self.df.replace(dic)
+        #self.df.to_csv('user_input.csv', sep=',', index = False, header = True)        
     
     def comparePrices(self,price):
         df = pd.read_csv('user_input.csv', sep=',')
-        self.pred_price.setText(str(price))
+        self.pred_price.setText(str(int(price)))
         print('Sale Price = {}'.format(df.loc[0, 'SalePrice']))
         print('predicted Price = {}'.format(price))
         if (price - df.loc[0,'SalePrice'])/df.loc[0,'SalePrice'] > 0.1:

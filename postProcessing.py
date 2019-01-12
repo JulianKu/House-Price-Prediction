@@ -104,8 +104,14 @@ def convertAlternatives():
     
     fields = ['SalePrice','GrLivArea','GarageCars','GarageArea','TotalBsmtSF','1stFlrSF','FullBath','TotRmsAbvGrd','YearBuilt','OverallQual']
     
+    
     for field in fields:
-        df[field] = temp[field]
+        try:
+            df[field] = temp[field]
+        except KeyError:
+            df[field] = ''
+            print("Some field from the alternative house is missing, adding as an empty field")        
+        
   
     df.to_csv('finished_alternative.csv', sep=',', index = False, header = True)
     

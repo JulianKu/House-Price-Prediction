@@ -30,7 +30,7 @@ Fair,Fa
 Poor,Po
 No Basement,NA
 Finished,Fin
-Rough Finished,RFn
+Rough Finish,RFn
 Unfinished,Unf
 No Garage,NA
 Brick/Tile,BrkTil
@@ -39,7 +39,7 @@ Poured Concrete,PConc
 Slab,Slab
 Stone,Stone
 Wood,Wood
-2type,2type
+2type,2Types
 Attached to home,Attchd
 Basement Garage,Basment
 Built-In,BuiltIn

@@ -1,2 +1,2 @@
 Neighborhood,ExterQual,KitchenQual,BsmtQual,GarageFinish,Foundation,HeatingQC,GarageType,MasVnrType,BsmtFinType1,SalePrice,GrLivArea,GarageCars,GarageArea,TotalBsmtSF,1stFlrSF,FullBath,TotRmsAbvGrd,YearBuilt,OverallQual
-CollgCr,Gd,Gd,Gd,,,,,,,235000,1760,2,,963,963,2,,,7
+ClearCr,Ex,Gd,Ex,Fin,CBlock,Ex,Attchd,BrkCmn,,40000,400,2,,30,30,3,,,1
