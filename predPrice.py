@@ -13,24 +13,30 @@ def predictSalesPrice(X, model):
     Return:
         y:  predicted price
     '''
+    try:
+        X.drop('Id',inplace=True)
+    except KeyError:
+        pass
     X_shaped = np.array(X).reshape(1,-1)
     y = model.predict(X_shaped)
     return y
+
+if __name__ == "__main__":
     
-modelFile = 'RandomCVModel.rfmdl'
-if os.path.isfile(modelFile):
-    model = pickle.load(open(modelFile, 'rb'))
-else:
-    raise IOError('file {} could not be found.\n Specify directory and make sure file exists')
-
-testData = pd.read_csv('house_geo_binominal_test.csv')
-
-SquaredLogErrors = []
-for sample in range(testData.shape[0]): 
-    testSample = testData.loc[sample]
-    realPrice = testSample['SalePrice']
-    testSample = testSample.drop(['Unnamed: 0','SalePrice','Neighborhood'])
-    predPrice = predictSalesPrice(testSample, model)
-    SquaredLogErrors.append(np.square(np.log((predPrice+1)/(realPrice+1))))
-RootMeanSquaredLogError = np.sqrt(np.mean(SquaredLogErrors))
-print('Root Mean Squared Log Error = {}'.format(RootMeanSquaredLogError)) 
+    modelFile = 'RandomCVModel.rfmdl'
+    if os.path.isfile(modelFile):
+        model = pickle.load(open(modelFile, 'rb'))
+    else:
+        raise IOError('file {} could not be found.\n Specify directory and make sure file exists')
+    
+    testData = pd.read_csv('house_geo_binominal_test.csv')
+    
+    SquaredLogErrors = []
+    for sample in range(testData.shape[0]): 
+        testSample = testData.loc[sample]
+        realPrice = testSample['SalePrice']
+        testSample = testSample.drop(['Unnamed: 0','SalePrice','Neighborhood'])
+        predPrice = predictSalesPrice(testSample, model)
+        SquaredLogErrors.append(np.square(np.log((predPrice+1)/(realPrice+1))))
+    RootMeanSquaredLogError = np.sqrt(np.mean(SquaredLogErrors))
+    print('Root Mean Squared Log Error = {}'.format(RootMeanSquaredLogError)) 

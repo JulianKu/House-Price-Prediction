@@ -135,7 +135,7 @@ def predkNN(trainData, NHData, inData=None, n_neighbors = 5, misVal=None):
         if feature == 'Neighborhood':
             # compute coordinates and valence group for each sample
             locVals = dataCat[feature].apply(getLocVal, 
-                                             hoods=neighborhoods, 
+                                             hoods=NHData, 
                                              misVal=misVal)
             # cast into data frame
             locVals = pd.DataFrame.from_items(zip(locVals.index, locVals.values)).T
@@ -202,38 +202,38 @@ def predkNN(trainData, NHData, inData=None, n_neighbors = 5, misVal=None):
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
-    
+if __name__ == "__main__":    
 #----------------------------------------
 # to run at initialization of GUI:
 #----------------------------------------
     
-# load data
-trainData, target = loadData('data', 'SalePrice')
-
-# get neighborhood geographical coordinates and value bins
-if not os.path.isfile('neighborhood.json'):
-    neighborhoods = prepNeighbors(trainData, target,
-                              bins=[0,100000,150000,200000,250000,300000,np.inf])
-else:
-    with open('neighborhood.json', 'r') as f:
-        neighborhoods = json.load(f)
+    # load data
+    trainData, target = loadData('data', 'SalePrice')
     
-missingVal = np.nan
-
-#----------------------------------------
-# create dummy data to test
-#----------------------------------------
-
-test = pd.read_csv('data_test.csv')
-inData = pd.DataFrame(np.array([np.full(len(trainData.columns), missingVal)]),
-                      columns=trainData.columns)
-inData.loc[0,['Neighborhood', 'ExterQual', 'OverallQual', 'GrLivArea', 'GarageCars']] \
-            = test.loc[0,['Neighborhood', 'ExterQual', 'OverallQual', 'GrLivArea', 'GarageCars']]
-inData.replace(to_replace='nan', value=missingVal, inplace=True)
-inData.rename({0: 'query'}, axis='index', inplace=True)
-
-#----------------------------------------
-# to run everytime query is made:
-#----------------------------------------
-#inData.replace(to_replace='nan', value=missingVal, inplace=True)
-prediction = predkNN(trainData, neighborhoods, inData, misVal = missingVal)  
+    # get neighborhood geographical coordinates and value bins
+    if not os.path.isfile('neighborhood.json'):
+        neighborhoods = prepNeighbors(trainData, target,
+                                  bins=[0,100000,150000,200000,250000,300000,np.inf])
+    else:
+        with open('neighborhood.json', 'r') as f:
+            neighborhoods = json.load(f)
+        
+    missingVal = np.nan
+    
+    #----------------------------------------
+    # create dummy data to test
+    #----------------------------------------
+    
+    test = pd.read_csv('data_test.csv')
+    inData = pd.DataFrame(np.array([np.full(len(trainData.columns), missingVal)]),
+                          columns=trainData.columns)
+    inData.loc[0,['Neighborhood', 'ExterQual', 'OverallQual', 'GrLivArea', 'GarageCars']] \
+                = test.loc[0,['Neighborhood', 'ExterQual', 'OverallQual', 'GrLivArea', 'GarageCars']]
+    inData.replace(to_replace='nan', value=missingVal, inplace=True)
+    inData.rename({0: 'query'}, axis='index', inplace=True)
+    
+    #----------------------------------------
+    # to run everytime query is made:
+    #----------------------------------------
+    #inData.replace(to_replace='nan', value=missingVal, inplace=True)
+    prediction = predkNN(trainData, neighborhoods, inData, misVal = missingVal)  

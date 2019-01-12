@@ -7,6 +7,7 @@ from sklearn.model_selection import cross_validate, RandomizedSearchCV
 from sklearn.svm import SVR
 from scipy.stats import beta
 from loadData import loadData
+import pickle
 
 def str2bool(s):
     if s.lower == 'true':
@@ -75,6 +76,8 @@ resultsRF = RFreg_random.cv_results_
 bestRFreg = RFreg_random.best_estimator_
 bestRFParams = RFreg_random.best_params_
 print('Randomized Search found these best parameters for the RF:\n{}'.format(bestRFParams))
+
+pickle.dump(RFreg_random, open('RandomCVModel.rfmdl', 'wb'))
 
 #------------------------------------------------------------------------------
 #------------------------------Support Vector Regression-----------------------

@@ -8,7 +8,7 @@ import postProcessing
 qtCreatorFile = "main.ui" # Enter file here.
 main, base = uic.loadUiType(qtCreatorFile)
 import similar
-#import predictionFramework
+import predictionFramework
 
 class Main(base, main):
     def __init__(self, parent=None):
@@ -34,35 +34,35 @@ class Main(base, main):
         #write to file
         self.df.to_csv('user_input.csv', sep=',', index = False, header = True)
         #remap
-        #postProcessing.postProcessing()
+        postProcessing.postProcessing()
         
         #prediction
-        #sample = pd.read_csv('user_input.csv')
-        #(price,imputedData)=predictionFramework.run(sample)
+        sample = pd.read_csv('user_input.csv')
+        (price,imputedSample)=predictionFramework.run(sample)
         #
-        price = 100
+        #price = 100
         self.comparePrices(price)
         
             
         #search alternatives
-        #similar.run('processed_user_input.csv')
+        similar.run('processed_user_input.csv')
         
         #
         postProcessing.convertAlternatives()
         postProcessing.postProcessing2()
         self.setAlternatives()
-    #def postProcessing(self):
-        #self.df.to_csv('user_input.csv', sep=',', index = False, header = True)        
-        #reader = csv.reader(open('plain.csv'))    
-        #dic = {}
-        #for row in reader:
-            #key = row[0]
-            #if key in dic:
-                #pass
-            #dic[key] = row[1:]
-        #self.df = pd.read_csv('user_input.csv')
-        #self.df.replace(dic)
-        #self.df.to_csv('user_input.csv', sep=',', index = False, header = True)        
+    def postProcessing(self):
+        self.df.to_csv('user_input.csv', sep=',', index = False, header = True)        
+        reader = csv.reader(open('plain.csv'))    
+        dic = {}
+        for row in reader:
+            key = row[0]
+            if key in dic:
+                pass
+            dic[key] = row[1:]
+        self.df = pd.read_csv('user_input.csv')
+        self.df.replace(dic)
+        self.df.to_csv('user_input.csv', sep=',', index = False, header = True)        
     
     def comparePrices(self,price):
         df = pd.read_csv('user_input.csv', sep=',')

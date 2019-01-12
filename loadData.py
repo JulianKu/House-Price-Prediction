@@ -39,6 +39,10 @@ def loadData(whichData, targetVar, seed=1):
         dataset = dataset.drop(labels='Unnamed: 0', axis=1)
     except Exception:
         pass
+    try:
+        dataset = dataset.drop(labels='Id', axis=1)
+    except Exception:
+        pass
     
     if whichData == 'house_geo_binominal':
         # process non-numerical data
