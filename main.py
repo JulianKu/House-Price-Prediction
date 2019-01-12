@@ -34,22 +34,15 @@ class Main(base, main):
         #write to file
         self.df.to_csv('user_input.csv', sep=',', index = False, header = True)
         #remap
-        postProcessing.postProcessing()
+        #postProcessing.postProcessing()
         
         #prediction
         #sample = pd.read_csv('user_input.csv')
         #(price,imputedData)=predictionFramework.run(sample)
-        #self.pred_price.setText(str(price))
+        #
         price = 100
-        print(self.df.loc['SalePrice'])
-        #if (price - self.df.loc[0,'SalePrice'])/self.df.loc[0,'SalePrice'] > 0.1:
-            #self.evaluation.setText('is too low')
-        #elif (self.df.loc[0,'SalePrice'] - price)/self.df.loc[0,'SalePrice'] > 0.1: 
-            #self.evaluation.setText('is too high')
-            ##price too high
-        #else:
-            #self.evaluation.setText('is OK')
-            #price ok
+        self.comparePrices(price)
+        
             
         #search alternatives
         #similar.run('processed_user_input.csv')
@@ -70,6 +63,19 @@ class Main(base, main):
         #self.df = pd.read_csv('user_input.csv')
         #self.df.replace(dic)
         #self.df.to_csv('user_input.csv', sep=',', index = False, header = True)        
+    
+    def comparePrices(self,price):
+        df = pd.read_csv('user_input.csv', sep=',')
+        self.pred_price.setText(str(price))
+        print(df['SalePrice'])
+        if (price - df.loc[0,'SalePrice'])/df.loc[0,'SalePrice'] > 0.1:
+            self.evaluation.setText('is too low')
+        elif (df.loc[0,'SalePrice'] - price)/df.loc[0,'SalePrice'] > 0.1: 
+            self.evaluation.setText('is too high')
+            ##price too high
+        else:
+            self.evaluation.setText('is OK')
+            #price ok        
     
     def getCategorical(self):
         fields = ['Neighborhood', 'ExterQual', 'KitchenQual', 'BsmtQual', 'GarageFinish', 'Foundation', 'HeatingQC', 'GarageType', 'MasVnrType','BsmtFinType1']

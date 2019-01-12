@@ -23,7 +23,7 @@ def postProcessing():
     for key in dic:
         my_csv_text = re.sub(str(key),str(dic[key][0]),my_csv_text)
 
-    print(my_csv_text)
+
     with open(my_csv_path, 'w') as f:
         f.write(my_csv_text)
 
@@ -103,7 +103,7 @@ def convertAlternatives():
     
     for field in fields:
         df[field] = temp[field]
-    print(df.columns)
+  
     df.to_csv('finished_alternative.csv', sep=',', index = False, header = True)
     
 if __name__ == "__main__":

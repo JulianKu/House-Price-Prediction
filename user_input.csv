@@ -1,2 +1,2 @@
-Neighborhood,ExterQual,KitchenQual,BsmtQual,GarageFinish,Foundation,HeatingQC,GarageType,MasVnrType,BsmtFinType1,SalePrice,GrLivArea,GarageCars,GarageArea,TotalBsmtSF,1stFlrSF,FullBath,TotRmsAbvGrd,Yearbuilt,OverallQual
-ClearCr,,TA,TA,Rough Finish,BrkTil,Ex,Attchd,,,45345,43543,,435,435,435,,45,45,1
+Neighborhood,ExterQual,KitchenQual,BsmtQual,GarageFinish,Foundation,HeatingQC,GarageType,MasVnrType,BsmtFinType1,SalePrice,GrLivArea,GarageCars,GarageArea,TotalBsmtSF,1stFlrSF,FullBath,TotRmsAbvGrd,YearBuilt,OverallQual
+,,,,,,,,,,34543,,,,,,,,,1
